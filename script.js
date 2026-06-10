@@ -1,4 +1,4 @@
-﻿    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
 
       // ==========================================
       // MOBILE HEADER ACTION
@@ -318,13 +318,15 @@
           Transmitting Data...
         `;
 
-        // Send a real POST request to Spring Boot Rest endpoint
-        fetch('/api/contact', {
+        // Send a request to Web3Forms API
+        fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           },
           body: JSON.stringify({
+            access_key: 'YOUR_ACCESS_KEY_HERE', // FIXME: Replace with your actual Web3Forms Access Key
             name: nameVal,
             email: emailVal,
             message: messageVal
@@ -339,7 +341,7 @@
           return response.json();
         })
         .then(data => {
-          if (data.status === 'success') {
+          if (data.success) {
             successOverlay.classList.add('active');
             contactForm.reset();
           } else {
